@@ -1,21 +1,26 @@
-import './App.css'
-import { useState } from 'react'
+import "./App.css";
+import { useState } from "react";
+
+//import component
+import Header from "./components/header";
+import Main from "./components/main";
+import UserCard from "./components/userCard";
 
 //mock data
-import userData from './userData'
+import userData from "./userData";
 
 function App() {
-  const [showData, setShowData] = useState(userData)
+  const [showData, setShowData] = useState(userData);
+  const [textSearch, setTextSearch] = useState("");
+
+  const setSearch = e => setTextSearch(e.target.value);
 
   return (
-    <div className='container'>
-      <ul>
-        {showData.map((user) => {
-          return <li key={user.id}>{`${user.first_name} ${user.last_name}`}</li>
-        })}
-      </ul>
+    <div className="container">
+      <Header onSearch={setSearch}/>
+      <Main userData={userData} textSearch={textSearch}/>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
